@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import crypto from "crypto";
 import bcrypt from "bcryptjs";
 
 const UserSchema = new mongoose.Schema(
@@ -15,6 +16,23 @@ const UserSchema = new mongoose.Schema(
       match: [/.+\@.+\..+/, "* please fill a valid email address"],
       required: "* email is required",
     },
+    imgId: { type: String, trim: true },
+    about: {
+      type: String,
+      trim: true,
+    },
+    photo: {
+      type: String,
+      trim: true,
+    },
+    role: {
+      type: String,
+      default: "subscriber",
+    },
+    seller: {
+      type: Boolean,
+      default: false,
+    },
     resetPasswordLink: {
       data: String,
       default: "",
@@ -24,6 +42,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: "* password is required",
     },
+
     salt: String,
   },
   { timestamps: true }
